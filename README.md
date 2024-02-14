@@ -1,6 +1,6 @@
-# SEA:ME@Korea 2023 Summer Hackathon<br>
+# DDoS scenario with pfifo_fast<br>
 
-During this hackathon, your mission is to develop a new digital instrument cluster system based on our baseline implementation in this repository. We'll provide you an Nvidia Jetson TX 2 embedded board that is the final target system. However, the instrument cluster can run on Intel/AMD CPU-based Ubuntu Linux distributions. If you use a Windows laptop, you have to install VMware and Ubuntu Linux as a guest operating system. We provide a preconfigured VMware image that includes all the libraries, tools, and source codes ready for the hackathon in the following link:
+Preconfigured VMware image that includes all the libraries, tools, and source codes ready for the DDoS scenario in the following link:
 
 - [VMware Ubuntu image](https://github.com/AveesLab/sea-me-hackathon-2023/blob/master/VMware%20Ubuntu%20image/README.md)<br>
 
@@ -174,28 +174,29 @@ source .bashrc
 
 
 
-## Step 6: Install Qt
+## Step 6: Install Open-TEE
 
-Install the QT5 packages.
+Install optee-os-nvidia rel 35.
 ```bash
-sudo apt install qt5-default
-sudo apt install qtcreator
-sudo apt install qtdeclarative5-dev
+sudo apt install ???
+sudo apt install ???
+sudo apt install ???
 ```
 
-You must install the QT Multimdeia module.
+Install optee-client 4.0.0 library.
 ```bash
-sudo apt install qtmultimedia5-dev
-sudo apt install qml-module-qtquick-controls2
-sudo apt install libqt5multimediawidgets5 libqt5multimedia5
-sudo apt install libqt5multimedia5-plugins qml-module-qtmultimedia
+sudo apt install ???
+sudo apt install ???
+sudo apt install ???
 ```
 
 
 <br/>
 
-## Step 7: Execute Cluster and Controller
-The environment setup is completed.<br>
-You can run the Controller and Cluster by following each README in the links below:
-- [Cluster](https://github.com/AveesLab/sea-me-hackathon-2023/tree/master/Cluster)
-- [Controller](https://github.com/AveesLab/sea-me-hackathon-2023/tree/master/Controller)
+## Step 7: Execute Cluster and Image Detecetion with DDoS Scenario
+
+```bash
+./do_cluster.sh
+./do_detect.sh
+./ddos_attacker.py
+```
