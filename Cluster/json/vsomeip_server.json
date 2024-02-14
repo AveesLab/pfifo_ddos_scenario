@@ -1,0 +1,39 @@
+{ 
+   "unicast" : "192.168.1.2",
+    "logging" :
+    {
+        "level" : "debug",
+        "console" : "true",
+        "file" : { "enable" : "false" },
+        "dlt" : "false"
+    },
+    "applications" :
+    [
+        {
+            "name" : "service-sample",
+            "id" : "0x1277"
+        }
+    ],
+    "services" :
+    [
+        {
+            "service" : "0x1234",
+            "instance" : "0x5678",
+            "unreliable" : "30509",
+            "someip-tp" : {
+            	"service-to-client": [
+            		"0x7C", "0x7D", "0x7E", "0x7F", "0x8001"
+            		]
+            	}
+        }
+    ],
+    "max-payload-size-unreliable" : "614400000",
+    "routing" : "service-sample",
+    "service-discovery" :
+    {
+       "enable" : "true",
+       "multicast" : "224.244.224.241",
+       "port" : "30490",
+       "protocol" : "udp"
+    }
+}

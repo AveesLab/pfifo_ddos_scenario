@@ -1,0 +1,46 @@
+import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-4-SOMEIP_deployment_spec.fdepl"
+import "Cluster.fidl"
+
+define org.genivi.commonapi.someip.deployment for interface commonapi.Cluster {
+        SomeIpServiceID = 4660
+
+	attribute errrorCheck {
+	  SomeIpGetterID = 8199
+	  SomeIpNotifierID = 40965
+	  SomeIpEventGroups = {
+	      4097
+	  }
+	}
+
+	method sendImage1 {
+		SomeIpMethodID = 124
+		SomeIpReliable = false
+	}
+	method sendImage2 {
+		SomeIpMethodID = 125
+		SomeIpReliable = false
+	}
+	method sendImage3 {
+		SomeIpMethodID = 126
+		SomeIpReliable = false
+	}
+	method sendImage4 {
+		SomeIpMethodID = 127
+		SomeIpReliable = false
+	}
+	
+	broadcast ErrorBroadcast {
+	  SomeIpEventID = 33333
+	    SomeIpEventGroups = {
+            4098
+	  }
+	}
+							
+}
+
+define org.genivi.commonapi.someip.deployment for provider as MyService {
+        instance commonapi.Cluster {
+                InstanceId = "cluster_service"
+                SomeIpInstanceID = 22136
+        }
+}

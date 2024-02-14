@@ -1,0 +1,4 @@
+ip neigh show
+<if already reachable exist => sudo ip neigh del (192.168.1.1) dev eth0>
+sudo ip neigh add 192.168.1.1 lladdr 48:b0:2d:05:ab:cb dev eth0 nud permanent
+sudo ip neigh add 192.168.1.2 lladdr 48:b0:2d:05:af:07 dev eth0 nud permanent
