@@ -21,7 +21,13 @@ Otherwise, if you want to use a native Linux environment, you have to install (i
 # CommonAPI vSomeIP QT Setup
 -->
 
-## Step 0: Make sure you have installed git and cmake
+## Step 0: Build Kernel Image ~~~.
+
+Kernel image with a special DDoS attack prevention method called Band-S in the following link:
+
+- [Kernel image for Band-S](https://github.com/AveesLab/kernel_5.10S/blob/main/README.md)<br><br>
+
+## Step 1: Make sure you have installed git and cmake
 ```bash
 sudo apt update
 sudo apt install git
@@ -30,7 +36,7 @@ sudo apt install cmake
 
 <br/>
 
-## Step 1: Install OpenJDK Java 8
+## Step 2: Install OpenJDK Java 8
 ```bash
 sudo apt install openjdk-8-jdk
 ```
@@ -60,7 +66,7 @@ java -version
 
 <br/>
 
-## Step 2: Install the Boost.Asio library
+## Step 3: Install the Boost.Asio library
 Boost.Asio is a C++ network library.
 ```bash
 sudo apt install libboost-all-dev
@@ -68,7 +74,7 @@ sudo apt install libboost-all-dev
 
 <br/>
 
-## Step 3: Build the CommonAPI core runtime
+## Step 4: Build the CommonAPI core runtime
 
 Create a build directory, which is `build-commonapi` in my case.
 
@@ -99,7 +105,7 @@ Result:
 
 <br/>
 
-## Step 4: Build the vsomeip library
+## Step 5: Build the vsomeip library
 
 Install dependent packages.
 ```bash
@@ -130,7 +136,7 @@ Result:
 
 <br/>
 
-## Step 5: Build the CommonAPI SOME/IP runtime library
+## Step 6: Build the CommonAPI SOME/IP runtime library
 
 Download and build the CommonAPI SOME/IP runtime library.
 
@@ -174,7 +180,7 @@ source .bashrc
 
 
 
-## Step 6: Install Open-TEE
+## Step 7: Install Open-TEE
 
 Install optee-os-nvidia rel 35.
 ```bash
@@ -193,7 +199,7 @@ sudo apt install ???
 
 <br/>
 
-## Step 7: Execute Cluster and Image Detecetion with DDoS Scenario
+## Step 8: Execute Cluster and Image Detecetion with DDoS Scenario
 
 ```bash
 ./do_cluster.sh
