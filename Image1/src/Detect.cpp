@@ -42,8 +42,6 @@ void Detect::startCamera() {
     int number;
     myProxy->getErrorBroadcastEvent().subscribe([&](const int32_t &result) {
         if(result == 1 && setSockOptNeeded) {
-            setsockopt(15, IPPROTO_IP, IP_TOS, &emergency, sizeof(emergency));
-            // system("/home/avees/jetson_xavier/optee_examples/test_app/host/./optee_example_hello_world");
             TEEC_Result res;
             TEEC_Context ctx;
             TEEC_Session sess;
@@ -61,7 +59,7 @@ void Detect::startCamera() {
         	memset(&op, 0, sizeof(op));
             op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INOUT, TEEC_NONE,
                             TEEC_NONE, TEEC_NONE);
-            op.params[0].value.a = 0;                
+            op.params[0].value.a = 15;                
             	printf("Send key\n");
             res = TEEC_InvokeCommand(&sess, TA_HELLO_WORLD_CMD_INC_VALUE, &op,
                         &err_origin);
