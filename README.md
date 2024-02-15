@@ -1,31 +1,10 @@
 # DDoS scenario with pfifo_fast<br>
 
-Preconfigured VMware image that includes all the libraries, tools, and source codes ready for the DDoS scenario in the following link:
-
-- [VMware Ubuntu image](https://github.com/AveesLab/sea-me-hackathon-2023/blob/master/VMware%20Ubuntu%20image/README.md)<br>
-
-Otherwise, if you want to use a native Linux environment, you have to install (i) vsomeip, (ii) CommonAPI, and (iii) QT5. Please follow the instructions below to prepare your development environment:
-<!---
-## Contents
-- [Step 1: Install OpenJDK Java 8](#step-1-install-openjdk-java-8)
-- [Step 2: Install Boost.Asio library](#step-2-install-boostasio-library)
-- [Step 3: Build the CommonAPI Runtime Library](#step-3-build-the-commonapi-runtime-library)
-- [Step 4: Build the vsomeip Library](#step-4-build-the-vsomeip-library)
-- [Step 5: Build the CommonAPI SOME/IP Runtime Library](#step-5-build-the-commonapi-someip-runtime-library)
-- [Step 6: Install Qt](#step-6-install-qt)
-- [Step 7: Execute Cluster & Controller](#step-7-execute-cluster-and-controller)
----
-<br>
-
-
-# CommonAPI vSomeIP QT Setup
--->
-
 ## Step 0: Build Kernel Image ~~~.
 
 Kernel image with a special DDoS attack prevention method called Band-S in the following link:
 
-- [Kernel image for Band-S](https://github.com/AveesLab/kernel_5.10S/blob/main/README.md)<br><br>
+- [Kernel image for Band-S](https://github.com/AveesLab/linux-tegra-5.10_s/blob/oe4t-patches-l4t-r35.1/README.md)<br><br>
 
 ## Step 1: Make sure you have installed git and cmake
 ```bash
