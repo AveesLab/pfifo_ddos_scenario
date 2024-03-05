@@ -170,9 +170,16 @@ sudo apt install ???
 
 Install optee-client 4.0.0 library.
 ```bash
-sudo apt install ???
-sudo apt install ???
-sudo apt install ???
+$ git clone https://github.com/OP-TEE/optee_client
+$ cd optee_client
+```
+
+Building using CMake.
+```bash
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc ..
+$ make
 ```
 
 
