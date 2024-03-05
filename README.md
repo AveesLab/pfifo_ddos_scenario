@@ -161,20 +161,18 @@ source .bashrc
 
 ## Step 7: Install Open-TEE
 
-Install ARM GCC Toolchains.
+Install Open-TEE.
 ```bash
-$ mkdir -p $HOME/toolchains
-$ cd $HOME/toolchains
+$ cd $HOME
+$ git clone https://github.com/OP-TEE/build.git
+$ cd build
+$ make -f toolchain.mk -j2
+```
 
-# Download 32bit toolchain
-$ wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2019.01/gcc-arm-8.2-2019.01-x86_64-arm-linux-gnueabi.tar.xz
-$ mkdir aarch32
-$ tar xf gcc-arm-8.2-2019.01-x86_64-arm-linux-gnueabi.tar.xz -C aarch32 --strip-components=1
-
-# Download 64bit toolchain
-$ wget https://developer.arm.com/-/media/Files/downloads/gnu-a/8.2-2019.01/gcc-arm-8.2-2019.01-x86_64-aarch64-linux-gnu.tar.xz
-$ mkdir aarch64
-$ tar xf gcc-arm-8.2-2019.01-x86_64-aarch64-linux-gnu.tar.xz -C aarch64 --strip-components=1
+Export PATH.
+```bash
+#If you have downloaded the toolchains as described above, you should have them at $HOME/toolchains/{aarch32/aarch64}, so now we just need to export the paths and then you are ready to starting compiling OP-TEE components.
+$ export PATH=$PATH:$HOME/toolchains/aarch32/bin:$HOME/toolchains/aarch64/bin
 ```
 
 Install optee-client 4.0.0 library.
