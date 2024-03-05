@@ -1,6 +1,6 @@
 # DDoS scenario with pfifo_fast<br>
 
-## Step 0: Build Kernel Image ~~~.
+## Step 0: Build Kernel Image.
 
 Kernel image with a special DDoS attack prevention method called Band-S in the following link:
 
