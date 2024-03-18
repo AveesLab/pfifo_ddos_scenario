@@ -1,5 +1,14 @@
 # DDoS scenario with pfifo_fast<br>
 
+# Band-S
+Band-S introduces a hidden transmit queue for Ethernet-based automotive networks to protect safety-critical data flows from cram attacks by unauthorized applications. By leveraging a trusted execution environment, Band-S ensures that only authorized applications can utilize this secure pathway, preventing the disruption of critical communications within vehicles. The implementation of Band-S maintains the integrity and security of essential vehicular functions, offering a resilient response to emerging cybersecurity threats in automotive Ethernet networks.
+
+**None**
+![image - 2024-03-18T143418 495](https://github.com/AveesLab/sea-me-hackathon-2023/assets/96398568/ecf120d5-66ba-4a16-8fd1-1d07e38f6690)
+
+**Band-S**
+![image - 2024-03-18T144521 426](https://github.com/AveesLab/sea-me-hackathon-2023/assets/96398568/909cf771-f3a1-40eb-9133-d07a1774a11f)
+
 ## Step 0: Build Kernel Image.
 
 Kernel image with a special DDoS attack prevention method called Band-S in the following link:
