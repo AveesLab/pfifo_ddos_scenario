@@ -42,34 +42,55 @@ void Detect::startCamera() {
     int number;
     myProxy->getErrorBroadcastEvent().subscribe([&](const int32_t &result) {
         if(result == 1 && setSockOptNeeded) {
-            TEEC_Result res;
-            TEEC_Context ctx;
-            TEEC_Session sess;
-            TEEC_Operation op;
-            TEEC_UUID uuid = TA_HELLO_WORLD_UUID;
-            uint32_t err_origin;
-            res = TEEC_InitializeContext(NULL, &ctx);
-	        if (res != TEEC_SUCCESS)
-		        errx(1, "TEEC_InitializeContext failed with code 0x%x", res);
-            res = TEEC_OpenSession(&ctx, &sess, &uuid,
-			       TEEC_LOGIN_PUBLIC, NULL, NULL, &err_origin);
-	        if (res != TEEC_SUCCESS)
-		    errx(1, "TEEC_Opensession failed with code 0x%x origin 0x%x",
-			    res, err_origin);
-        	memset(&op, 0, sizeof(op));
-            op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INOUT, TEEC_NONE,
-                            TEEC_NONE, TEEC_NONE);
-            op.params[0].value.a = 15;                
-            	printf("Send key\n");
-            res = TEEC_InvokeCommand(&sess, TA_HELLO_WORLD_CMD_INC_VALUE, &op,
-                        &err_origin);
-            if (res != TEEC_SUCCESS)
-                errx(1, "TEEC_InvokeCommand failed with code 0x%x origin 0x%x",
-                    res, err_origin);
-            printf("Set Emergency\n");
-            TEEC_CloseSession(&sess);
-
-	        TEEC_FinalizeContext(&ctx);
+	    TEEC_Result res;
+	    TEEC_Context ctx;
+	    TEEC_Session sess;
+	    TEEC_Operation op;
+	    TEEC_UUID uuid = TA_HELLO_WORLD_UUID;
+	    uint32_t err_origin;
+	    res = TEEC_InitializeContext(NULL, &ctx);
+	    if (res != TEEC_SUCCESS)
+	        errx(1, "TEEC_InitializeContext failed with code 0x%x", res);
+	    res = TEEC_OpenSession(&ctx, &sess, &uuid,
+	            TEEC_LOGIN_PUBLIC, NULL, NULL, &err_origin);
+	    if (res != TEEC_SUCCESS)
+	    errx(1, "TEEC_Opensession failed with code 0x%x origin 0x%x",
+	        res, err_origin);
+	
+	    // 암호화된 데이터 파일 읽기
+	    std::ifstream file("signature.bin", std::ios::binary);
+	    if (!file) {
+	        std::cerr << "Error: File not found." << std::endl;
+	        return 1; // or other error handling
+	    }
+	    std::vector<char> encrypted_data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	    if (file.fail()) {
+	        std::cerr << "Error reading the file." << std::endl;
+	        return 1; // or other error handling
+	    }
+	    file.close();        
+	
+	    // 공개키 데이터 로드
+	    std::ifstream key_file("public_key.pem", std::ios::binary);
+	    std::vector<char> public_key((std::istreambuf_iterator<char>(key_file)), std::istreambuf_iterator<char>());
+	    key_file.close();   
+	
+	    // TEEC_Operation 설정
+	    memset(&op, 0, sizeof(op));
+	    op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INOUT, TEEC_MEMREF_TEMP_INPUT, TEEC_MEMREF_TEMP_INPUT, TEEC_NONE);
+	    op.params[0].value.a = 15; // 예를 들어 socket fd 값
+	    op.params[1].tmpref.buffer = encrypted_data.data();
+	    op.params[1].tmpref.size = encrypted_data.size();
+	    op.params[2].tmpref.buffer = public_key.data();
+	    op.params[2].tmpref.size = public_key.size();
+	    //TA_HELLO_WORLD_CMD_DEC_VALUE
+	    // TA에 커맨드 전송
+	    res = TEEC_InvokeCommand(&sess, TA_HELLO_WORLD_CMD_INC_VALUE, &op, &err_origin);
+	    if (res != TEEC_SUCCESS) errx(1, "TEEC_InvokeCommand failed with code 0x%x origin 0x%x", res, err_origin);
+	    printf("Set Emergency\n");
+	    TEEC_CloseSession(&sess);
+	
+	    TEEC_FinalizeContext(&ctx);
             setSockOptNeeded = false;
         }
     });
